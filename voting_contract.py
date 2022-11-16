@@ -26,9 +26,11 @@ def approval_program():
     # this gets the sender vote from an external application's local state
     get_vote_of_sender = App.localGetEx(Int(0), App.id(), Bytes("voted"))
 
+    # when delete app is called get vote of sender is called and the if statement is called
     on_closeout = Seq(
         [
             get_vote_of_sender,
+            # if vote hasnt ended and the user has voted, we delete their vote
             If(
                 And(
                     Global.round() <= App.globalGet(Bytes("VoteEnd")),
@@ -39,6 +41,7 @@ def approval_program():
                     App.globalGet(get_vote_of_sender.value()) - Int(1),
                 ),
             ),
+            # otherwise we just approve the app deletion
             Return(Int(1)),
         ]
     )
