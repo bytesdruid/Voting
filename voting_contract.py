@@ -46,6 +46,7 @@ def approval_program():
         ]
     )
 
+    # checks that the registration period is active before approving opt in
     on_register = Return(
         And(
             Global.round() >= App.globalGet(Bytes("RegBegin")),
