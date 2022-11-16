@@ -54,7 +54,9 @@ def approval_program():
         )
     )
 
+    # first app arg is assigned to choice variable
     choice = Txn.application_args[1]
+    # gets the current choice count value
     choice_tally = App.globalGet(choice)
     on_vote = Seq(
         [
