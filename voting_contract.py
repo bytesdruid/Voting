@@ -94,10 +94,12 @@ def approval_program():
 
 
 def clear_state_program():
+    # gets the vote of the voted value from the external app
     get_vote_of_sender = App.localGetEx(Int(0), App.id(), Bytes("voted"))
     program = Seq(
         [
             get_vote_of_sender,
+            # if the vote has not ended, then remove the account's vote
             If(
                 And(
                     Global.round() <= App.globalGet(Bytes("VoteEnd")),
