@@ -4,11 +4,17 @@ from pyteal import *
 def approval_program():
     on_creation = Seq(
         [
+            # creator is set to the contract creator
             App.globalPut(Bytes("Creator"), Txn.sender()),
+            # expecting four arguments for the registration and voting time frames
             Assert(Txn.application_args.length() == Int(4)),
+            # registration begins blockround
             App.globalPut(Bytes("RegBegin"), Btoi(Txn.application_args[0])),
+            # registration ending blockround
             App.globalPut(Bytes("RegEnd"), Btoi(Txn.application_args[1])),
+            # vote begining blockround
             App.globalPut(Bytes("VoteBegin"), Btoi(Txn.application_args[2])),
+            # vote ending blockround
             App.globalPut(Bytes("VoteEnd"), Btoi(Txn.application_args[3])),
             Return(Int(1)),
         ]
