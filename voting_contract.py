@@ -20,8 +20,10 @@ def approval_program():
         ]
     )
 
+    # checks to see if txn sender is the contract creator
     is_creator = Txn.sender() == App.globalGet(Bytes("Creator"))
 
+    # this gets the sender vote from an external application's local state
     get_vote_of_sender = App.localGetEx(Int(0), App.id(), Bytes("voted"))
 
     on_closeout = Seq(
