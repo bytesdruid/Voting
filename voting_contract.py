@@ -58,17 +58,24 @@ def approval_program():
     choice = Txn.application_args[1]
     # gets the current choice count value
     choice_tally = App.globalGet(choice)
+
+    # this is the only noop call in this application
     on_vote = Seq(
         [
+            # first we check that the voting period is active
             Assert(
                 And(
                     Global.round() >= App.globalGet(Bytes("VoteBegin")),
                     Global.round() <= App.globalGet(Bytes("VoteEnd")),
                 )
             ),
+            # next the vote of the txn sender is retrieved
             get_vote_of_sender,
+            # if the vote exists then we continue executing the sequence
             If(get_vote_of_sender.hasValue(), Return(Int(0))),
+            # the choice key is accessed and the tally is updated by adding one 
             App.globalPut(choice, choice_tally + Int(1)),
+            # records the voter's choice in the voted key of the voter's local state
             App.localPut(Int(0), Bytes("voted"), choice),
             Return(Int(1)),
         ]
