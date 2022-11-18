@@ -1,9 +1,10 @@
 from pyteal import *
 
-
 def approval_program():
     on_creation = Seq(
         [
+            # name of this application
+            App.globalPut(Bytes("AppName"), Bytes("Community 1 Governance Application")),
             # creator is set to the contract creator
             App.globalPut(Bytes("Creator"), Txn.sender()),
             # expecting four arguments for the registration and voting time frames
