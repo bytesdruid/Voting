@@ -11,6 +11,8 @@ def approval_program():
             App.globalPut(Bytes("Option B"), Bytes("Description for option two.")),
             # choice C
             App.globalPut(Bytes("Option C"), Bytes("Description for option three.")),
+            # choice D
+            App.globalPut(Bytes("Option D"), Bytes("Description for option four.")),
             # creator is set to the contract creator
             App.globalPut(Bytes("Creator"), Txn.sender()),
             # expecting four arguments for the registration and voting time frames
