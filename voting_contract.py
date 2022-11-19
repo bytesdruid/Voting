@@ -1,3 +1,10 @@
+# 100 fungible tokens are minted for the 
+# 5 NTFs for the board of directors
+    # ??? What are the special rights of these roles?
+    # How are these positions voted into thier positions?
+        # %51 needed to vote into position?
+# 
+
 from pyteal import *
 
 def approval_program():
