@@ -1,10 +1,3 @@
-# 100 fungible tokens are minted for the 
-# 5 NTFs for the board of directors
-    # ??? What are the special rights of these roles?
-    # How are these positions voted into thier positions?
-        # %51 needed to vote into position?
-# 
-
 from pyteal import *
 
 def approval_program():
@@ -16,10 +9,6 @@ def approval_program():
             App.globalPut(Bytes("Option A"), Bytes("Description for option one.")),
             # choice B
             App.globalPut(Bytes("Option B"), Bytes("Description for option two.")),
-            # choice C
-            App.globalPut(Bytes("Option C"), Bytes("Description for option three.")),
-            # choice D
-            App.globalPut(Bytes("Option D"), Bytes("Description for option four.")),
             # creator is set to the contract creator
             App.globalPut(Bytes("Creator"), Txn.sender()),
             # expecting four arguments for the registration and voting time frames
